@@ -7,7 +7,9 @@ using Semana07A2023.Interfaces;
 using System;
 using Android.Speech.Tts;
 using Xamarin.Forms;
+using Semana07A2023.Droid.Implementations;
 
+[assembly: Dependency(typeof(TextToSpeechImplementation))]
 namespace Semana07A2023.Droid.Implementations
 {
     public class TextToSpeechImplementation : Java.Lang.Object, ITextToSpeech, TextToSpeech.IOnInitListener
