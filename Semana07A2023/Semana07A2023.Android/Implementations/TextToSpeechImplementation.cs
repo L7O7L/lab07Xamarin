@@ -6,19 +6,38 @@ using Android.Runtime;
 using Semana07A2023.Interfaces;
 using System;
 using Android.Speech.Tts;
+using Xamarin.Forms;
 
 namespace Semana07A2023.Droid.Implementations
 {
     public class TextToSpeechImplementation : Java.Lang.Object, ITextToSpeech, TextToSpeech.IOnInitListener
     {
-        public void OnInit([GeneratedEnum] OperationResult status)
-        {
-            throw new NotImplementedException();
-        }
+        TextToSpeech speaker;
+        string toSpeak;
 
         public void Speak(string text)
         {
-            throw new NotImplementedException();
+            toSpeak = text;
+            if (speaker == null)
+            {
+
+                speaker = new TextToSpeech(Forms.Context, this);
+            }
+            else
+            {
+                speaker.Speak(toSpeak, QueueMode.Flush, null, null);
+            }
         }
+
+        #region IOnInitListener implementation
+        public void OnInit(OperationResult status)
+        {
+            if (status.Equals(OperationResult.Success))
+            {
+                speaker.Speak(toSpeak, QueueMode.Flush, null, null);
+            }
+        }
+        #endregion
     }
+
 }
