@@ -11,6 +11,7 @@ namespace Semana07A2023
             InitializeComponent();
 
             MainPage = new MainPage();
+
         }
 
         protected override void OnStart()
